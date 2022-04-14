@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.3.12
   firebase_core: ^1.14.0
+  gender_selection: "^0.0.8"
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,6 +63,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/logo.png
+   - assets/profile_bg.png
+   - assets/Profile.png
+   - assets/bg.png
    
   #   - images/a_dot_ham.jpeg
 

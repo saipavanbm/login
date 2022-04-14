@@ -11,6 +11,7 @@ class Loginscreen extends StatefulWidget {
 class _LoginscreenState extends State<Loginscreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
+  String _error = '';
 
   //editing controller
   final TextEditingController emailcontroller = new TextEditingController();
@@ -65,11 +66,16 @@ class _LoginscreenState extends State<Loginscreen> {
           borderRadius: BorderRadius.circular(12), // <-- Radius
         ),
       ),
-      onPressed: () {
-        FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: emailcontroller.text, password: passwordcontroller.text)
-            .then((value) => print('Logged in'));
+      onPressed: () async {
+        try {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: emailcontroller.text, password: passwordcontroller.text);
+        } on FirebaseAuthException catch (e) {
+          print('Failed with error code: ${e.code}');
+          setState(() {
+            _error = e.message.toString();
+          });
+        }
       },
       child: const Text(
         'Login now',
@@ -109,6 +115,13 @@ class _LoginscreenState extends State<Loginscreen> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: passwordField,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        '$_error',
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.all(15),

@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _SignupscreenState extends State<Signupscreen> {
   }
 
   final _auth = FirebaseAuth.instance;
+  String _error = '';
 
   //editing controller
   final TextEditingController namecontroller = new TextEditingController();
@@ -99,11 +101,16 @@ class _SignupscreenState extends State<Signupscreen> {
           borderRadius: BorderRadius.circular(12), // <-- Radius
         ),
       ),
-      onPressed: () {
-        FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-                email: emailcontroller.text, password: passwordcontroller.text)
-            .then((res) => print('sign in'));
+      onPressed: () async {
+        try {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: emailcontroller.text, password: passwordcontroller.text);
+        } on FirebaseAuthException catch (e) {
+          print('Failed with error code: ${e.code}');
+          setState(() {
+            _error = e.message.toString();
+          });
+        }
       },
       child: const Text(
         'Create an account',
@@ -151,6 +158,13 @@ class _SignupscreenState extends State<Signupscreen> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: loginbutton,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        '$_error',
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
                     Padding(
                         padding: EdgeInsets.all(15),
