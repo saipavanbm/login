@@ -173,9 +173,9 @@ class _RegistrationState extends State<Registration> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                          padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                          padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
                           child: Text(
-                            'A little more about you,\n    person_name',
+                            'A little more about you,\n          person_name',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w700,

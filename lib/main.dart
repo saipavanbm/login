@@ -19,7 +19,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MystatefulWidget(),
+      home: Registration(),
     );
   }
 }

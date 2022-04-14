@@ -12,20 +12,19 @@ class _MystatefulWidgetState extends State<MystatefulWidget> {
 
   Widget CustomRadioButton(String text, int index) {
     String gender = text.toString();
-    Color defaultcolor = Colors.white;
+    Color defaultcolor = Colors.pink;
     return ElevatedButton(
       onPressed: () {
         setState(() {
           value = index;
-          value == 1 ? defaultcolor = Color(0xffFFC76C) : Colors.white;
-          value == 2 ? defaultcolor = Color(0xffFFC76C) : Colors.white;
-          value == 3 ? defaultcolor = Color(0xffFFC76C) : Colors.white;
         });
+        print(defaultcolor);
+        print(value);
       },
       child: Text('$gender'),
       style: ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 15),
-        primary: '$defaultcolor',
+        primary: defaultcolor,
         onPrimary: Colors.black,
         minimumSize: Size(40, 30),
         shape: RoundedRectangleBorder(
